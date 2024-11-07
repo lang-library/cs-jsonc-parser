@@ -123,7 +123,16 @@ public class ObjectParser: IObjectConverter
         }
         else if (type == typeof(DateTime))
         {
-            return oc.ConvertResult(((DateTime)x).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"), origTypeName);
+            DateTime dt = (DateTime)x;
+            switch (dt.Kind)
+            {
+                case DateTimeKind.Local:
+                    return oc.ConvertResult(dt.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"), origTypeName);
+                case DateTimeKind.Utc:
+                    return oc.ConvertResult(dt.ToString("o"), origTypeName);
+                default:
+                    return oc.ConvertResult(dt.ToString("o").Replace("Z", ""), origTypeName);
+            }
         }
         else if (type == typeof(TimeSpan))
         {
@@ -347,7 +356,7 @@ internal class _JsonStringBuilder
                 case DateTimeKind.Utc:
                     WriteToSB(sb, dt.ToString("o"), level, cancelIndent);
                     break;
-                case DateTimeKind.Unspecified:
+                default: //case DateTimeKind.Unspecified:
                     WriteToSB(sb, dt.ToString("o").Replace("Z", ""), level, cancelIndent);
                     break;
             }
