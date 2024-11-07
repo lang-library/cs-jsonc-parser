@@ -337,17 +337,17 @@ internal class _JsonStringBuilder
         }
         else if (type == typeof(DateTime))
         {
-            WriteToSB(sb, ((DateTime)x).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"), level);
+            WriteToSB(sb, ((DateTime)x).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"), level, cancelIndent);
             return;
         }
         else if (type == typeof(TimeSpan))
         {
-            WriteToSB(sb, x.ToString(), level);
+            WriteToSB(sb, x.ToString(), level, cancelIndent);
             return;
         }
         else if (type == typeof(Guid))
         {
-            WriteToSB(sb, x.ToString(), level);
+            WriteToSB(sb, x.ToString(), level, cancelIndent);
             return;
         }
         else if (type.IsEnum)
