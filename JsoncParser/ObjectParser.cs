@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
@@ -337,7 +338,19 @@ internal class _JsonStringBuilder
         }
         else if (type == typeof(DateTime))
         {
-            WriteToSB(sb, ((DateTime)x).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"), level, cancelIndent);
+            DateTime dt = (DateTime)x;
+            switch(dt.Kind)
+            {
+                case DateTimeKind.Local:
+                    WriteToSB(sb, dt.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"), level, cancelIndent);
+                    break;
+                case DateTimeKind.Utc:
+                    WriteToSB(sb, dt.ToString("o"), level, cancelIndent);
+                    break;
+                case DateTimeKind.Unspecified:
+                    WriteToSB(sb, dt.ToString("o").Replace("Z", ""), level, cancelIndent);
+                    break;
+            }
             return;
         }
         else if (type == typeof(TimeSpan))
