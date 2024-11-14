@@ -39,7 +39,7 @@ static class Program
         Assert.Equal("""
                      Illegal JSON: `{ "a": //line comment
                        123 }`
-                     """.Replace("\r\n", "\n"), exception1.Message);
+                     """.Replace("\r\n", "\n"), exception1.Message.Replace("\r\n", "\n"));
     }
     static void TestJsonc()
     {
