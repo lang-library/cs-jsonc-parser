@@ -97,45 +97,18 @@ static class Program
         var ox = unpickler.loads(bytes);
         Echo(new CSharpJsonHandler(true, false).Stringify(ox, true));
         Echo(new CSharpJsonHandler(true, false).Stringify(ox, true, true));
-#if false
-        Echo(Global.EasyLanguageParser.Parse("$@ console.log(\"as-is@@@@\"); @"));
-        Echo(Global.EasyLanguageParser.Parse("{g1: `(123 455)}"));
-        Echo(Global.EasyLanguageParser.Parse(":keyword - _! % &-= +*<>/?"));
-        Echo(Global.EasyLanguageParser.Parse("<0>"));
-        Echo(Global.EasyLanguageParser.Parse("g1"));
-        Echo(Global.EasyLanguageParser.Parse("\\abc"));
-        Echo(Global.EasyLanguageParser.Parse("'あいうえお"));
-        Echo(Global.EasyLanguageParser.Parse("_!%&-=~+*<>/?"));
-        Echo(Global.EasyLanguageParser.Parse("{ z: :keyword-_!%&-=+*/? }"));
-        var o3 = Global.EasyLanguageParser.Parse("""
-//#! /usr/bin/env elang
-            { "a": //line comment
-              g_1
-              b: `(add2 777 888) ; line comment 2
-              jp: `あいうえお
-              x: (\1+ 123) #! line comment 3
-              y: _!%&|-=+*/?
-              z: :keyword-_!%&|-=+*/? }
-            """);
-        Echo(o3, "o3");
-        var o4 = Global.EasyLanguageParser.Parse("""
-//#! /usr/bin/env elang
-            (let
-              ({g1: '(123 455)})
-              ((. console log) (. g [0]))
-              $@ console.log("as-is@@@@"); @
-              (cast System.Collections.Generic.List<object> o)
-            )
-            """);
-        Echo(o4, "o3");
-        Echo(Global.EasyLanguageParser.Parse("lisp-symbol"));
-        Echo(Global.EasyLanguageParser.Parse("~lisp-variable"));
-        Echo(Global.EasyLanguageParser.Parse("~@lisp-variable"));
-        Echo(Global.EasyLanguageParser.Parse("{lisp-symbol: 123}"));
-        Echo(Global.EasyLanguageParser.Parse("{symbol: 123}"));
-        Echo(Global.EasyLanguageParser.Parse("""
-            (setf cns '('a . 'b))
-            """));
-#endif
+        var t1 = new ObjectParser(false).Parse(
+            new { x = 123, y = 456 });
+        Echo(t1, "t1");
+        var t2 = new ObjectParser(false).Parse(
+            new { y = 456, x = 123 });
+        Echo(t2, "t2");
+        var t3 = new ObjectParser(false).Parse(
+            new { x = 123, y = 4567 });
+        Echo(t3, "t3");
+        Console.WriteLine(JsoncTester.DeepEquals(t1, t2));
+        Console.WriteLine(JsoncTester.DeepEquals(t1, t3));
+        Console.WriteLine(JsoncTester.JsonEquals(new ObjectParser(false).Stringify(t1, false), new ObjectParser(false).Stringify(t2, false)));
+        Console.WriteLine(JsoncTester.JsonEquals(new ObjectParser(false).Stringify(t1, false), new ObjectParser(false).Stringify(t3, false)));
     }
 }
