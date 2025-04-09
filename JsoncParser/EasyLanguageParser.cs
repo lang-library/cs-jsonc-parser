@@ -1,5 +1,6 @@
-﻿#if false
+﻿#if true
 using Global.Parser.ELang;
+//using Global.Parser.JsonC;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -343,12 +344,20 @@ public class EasyLanguageParser
         }
         else if (rule is Rule_member_name)
         {
+#if true
             foreach (var r in rules)
             {
                 object result = RuleToObject(r, NumberAsDecimal);
                 if (result is string) return result;
                 if (result is Dictionary<string, object>) return (result as Dictionary<string, object>)["?"];
             }
+#else
+            foreach (var r in rules)
+            {
+                if (r is Rule_string) return (string)RuleToObject(r, NumberAsDecimal);
+                if (r is Rule_lisp_symbol) return (string)RuleToObject(r, NumberAsDecimal);
+            }
+#endif
         }
         else if (rule is Rule_string)
         {
