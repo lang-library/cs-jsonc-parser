@@ -44,32 +44,22 @@ static class Program
     static void TestJsonc()
     {
         ShowDetail = true;
-        var o3 = Global.EasyLanguageParser.Parse("""
+        var o3 = Global.JsoncParser.Parse("""
             { 'a': 123 }
             """);
         Echo(o3, "o3");
-        var o4 = Global.EasyLanguageParser.Parse("""
+        var o4 = Global.JsoncParser.Parse("""
             { a: 123 }
             """);
         Echo(o4, "o4");
-        var o5 = Global.EasyLanguageParser.Parse("""
+        var o5 = Global.JsoncParser.Parse("""
             { "a": /*comment*/123 }
             """);
         Echo(o5, "o5");
-        var o6 = Global.EasyLanguageParser.Parse("""
+        var o6 = Global.JsoncParser.Parse("""
             { "a": //line comment
               123 }
             """);
-        Echo(o6, "o6");
-        var o7 = Global.EasyLanguageParser.Parse("""
-            { abc-def: //line comment
-              123 }
-            """);
-        Echo(o7, "o7");
-        var o8 = Global.EasyLanguageParser.Parse("""
-            (a-a b-a c-c)
-            """);
-        Echo(o8, "o8");
     }
     [STAThread]
     static void Main(string[] originalArgs)
@@ -83,7 +73,7 @@ static class Program
         Echo(json1, "json1");
         string json2 = new ObjectParser(false).Stringify(o1, true);
         Echo(json2, "json2");
-        var o2 = EasyLanguageParser.Parse("""
+        var o2 = JsoncParser.Parse("""
             [11, 22, {}, 33]
             """);
         string json3 = new ObjectParser(false).Stringify(o2, true);

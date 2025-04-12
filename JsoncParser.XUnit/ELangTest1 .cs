@@ -1,4 +1,4 @@
-﻿#if false
+﻿#if true
 //using MyJson;
 //using static MyJson.MyData;
 using static Global.SharpJson;
@@ -93,6 +93,7 @@ public class Elang1Test1
             {"!":"vector","?":[11,22,33]}
             """, json1);
     }
+#if false
     [Fact]
     public void Test07()
     {
@@ -105,6 +106,7 @@ public class Elang1Test1
             {"!":"deref","?":[{"!":"symbol","?":"d"}]}
             """, json1);
     }
+#endif
     [Fact]
     public void Test08()
     {
