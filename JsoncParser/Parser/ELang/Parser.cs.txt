@@ -158,6 +158,7 @@ namespace Global.Parser.ELang {
       else if (rulename.ToLower().Equals("value".ToLower())) rule = Rule_value.Parse(context);
       else if (rulename.ToLower().Equals("false".ToLower())) rule = Rule_false.Parse(context);
       else if (rulename.ToLower().Equals("null".ToLower())) rule = Rule_null.Parse(context);
+      else if (rulename.ToLower().Equals("nil".ToLower())) rule = Rule_nil.Parse(context);
       else if (rulename.ToLower().Equals("true".ToLower())) rule = Rule_true.Parse(context);
       else if (rulename.ToLower().Equals("object".ToLower())) rule = Rule_object.Parse(context);
       else if (rulename.ToLower().Equals("member".ToLower())) rule = Rule_member.Parse(context);

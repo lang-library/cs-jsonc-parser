@@ -211,6 +211,18 @@ namespace Global.Parser.ELang {
       return null;
     }
 
+    public Object Visit(Rule_nil rule)
+    {
+      if (!terminal) System.Console.WriteLine();
+      Console.Write("<nil>");
+      terminal = false;
+      VisitRules(rule.rules);
+      if (!terminal) System.Console.WriteLine();
+      Console.Write("</nil>");
+      terminal = false;
+      return null;
+    }
+
     public Object Visit(Rule_true rule)
     {
       if (!terminal) System.Console.WriteLine();

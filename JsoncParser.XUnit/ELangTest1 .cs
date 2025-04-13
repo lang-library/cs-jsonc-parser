@@ -93,17 +93,17 @@ public class Elang1Test1
             {"!":"vector","?":[11,22,33]}
             """, json1);
     }
-#if false
+#if true
     [Fact]
     public void Test07()
     {
         var o1 = Global.EasyLanguageParser.Parse("""
-            @(d)
+            nil
             """);
         string json1 = new ObjectParser().Stringify(o1, false);
         Print(json1, "json1");
         Assert.Equal("""
-            {"!":"deref","?":[{"!":"symbol","?":"d"}]}
+            null
             """, json1);
     }
 #endif

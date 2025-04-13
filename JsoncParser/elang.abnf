@@ -36,13 +36,15 @@ inslcomment = *( %x01-09 / %x0B / %x0C / %x0E-FFFFFFFF );
 inmlcomment = *( %x01-29 / %x2B-FFFFFFFF / ( %x2A ( %x01-2E / %x30-FFFFFFFF ) ) );
 
 #value = false / null / true / object / array / number / string / quote / slot;
-value = false / null / true / object / array / number / string / lisp-symbol / vector / quote / unquote / deref / metadata / as-is;
+value = false  / true / null / nil / object / array / number / string / lisp-symbol / vector / quote / unquote / deref / metadata / as-is;
 
-false = %x66.61.6c.73.65;   #; false
+false = %x66.61.6c.73.65;  #; false
 
-null  = %x6e.75.6c.6c;      #; null
+null  = %x6e.75.6c.6c;     #; nul
 
-true  = %x74.72.75.65;      #; true
+nil   = %x6e.69.6c;        #; nil
+
+true  = %x74.72.75.65;     #; true
 
 object = begin-object [ member *( value-separator member ) ] end-object;
 

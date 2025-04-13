@@ -21,6 +21,7 @@ namespace Global.Parser.ELang {
     Object Visit(Rule_value rule);
     Object Visit(Rule_false rule);
     Object Visit(Rule_null rule);
+    Object Visit(Rule_nil rule);
     Object Visit(Rule_true rule);
     Object Visit(Rule_object rule);
     Object Visit(Rule_member rule);

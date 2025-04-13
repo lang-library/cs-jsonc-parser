@@ -395,6 +395,10 @@ public class EasyLanguageParser
         {
             return null;
         }
+        else if (rule is Rule_nil)
+        {
+            return null;
+        }
         else
         {
             throw new Exception($"{FullName(rule)} is not supported");
